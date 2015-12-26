@@ -51,13 +51,30 @@ $(document).ready(function(){
       fileSettings[fileid]["hidden"] = true;
     }
   })
+
+  var disConnected = function(obj){
+    console.log("DISCONNECTED",obj);
+    $("#status").removeClass("success").addClass("error");
+    $("#logs").append("<p style='color:#DC0000;'>Webtail disconnected from server.</p>");
+    $(".file-li").remove();
+  }
+
+  var connected = function(obj){
+    $("#status").removeClass("error").addClass("success");
+    $("#logs").append("<p style='color:#2DA92D;'>Webtail connected to server.</p>");
+  }
+
   var socket = io();
+  socket.on('disconnect',function(error){ disConnected(error)})
   socket.on('connect',function(){
+    connected(null)
     socket.emit('wt_init','Hello from client')
-    socket.on("wt_error",function(error){console.log("Server error: "+error)})
+    socket.on("wt_error",function(error){
+      disconnect(error)
+    })
     socket.on("wt_new",function(data){
       data = json(data)
-      li = "<li> <label><input class='file-select' data-fileid='"+data.hash+"' checked type='checkbox'>"+data.filename+"</label></li>"
+      li = "<li class='file-li'> <label><input class='file-select' data-fileid='"+data.hash+"' checked type='checkbox'>"+data.filename+"</label></li>"
       fileSettings[data.hash] = {hidden:false}
       $("#files>ul").prepend(li)
     })

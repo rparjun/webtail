@@ -23,6 +23,31 @@ ul{
   font-family: 'monospace';
   font-weight: 400;
 }
+#status{
+  border-radius:6px;
+  font-size:9px;
+  vertical-align:3px;
+}
+.error{
+  background-color: #DC0000;
+  animation: redPulse 1s infinite alternate;
+}
+.success {
+  background-color: #2DA92D;
+  animation: greenPulse 1s infinite alternate;
+}
+
+
+@keyframes greenPulse{
+  from { box-shadow:0px 0px 1px 1px #23D223; }
+  to { box-shadow:0px 0px 3px 3px #23D223; }
+}
+
+@keyframes redPulse{
+  from { box-shadow:0px 0px 1px 1px #FB1A00; }
+  to { box-shadow:0px 0px 3px 3px #FB1A00; }
+}
+
 #logs{
   margin-top:30px;
   height:90%;
