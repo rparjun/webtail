@@ -58,6 +58,10 @@ ul{
 .hidden{
   display:none;
 }
+.search-hidden{
+  display:none;
+}
+
 .footer{
   background-color:#ECEFEE;
   position:fixed;

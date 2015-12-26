@@ -5,7 +5,32 @@ $(document).ready(function(){
     catch(e){return {}}
   }
   var autoScroll = true,
-      fileSettings = {};
+      fileSettings = {},
+      searchQuery = "",
+      searchCount = 100;
+
+  var search = function(query){
+    searchQuery = query;
+    if(query == ""){
+      $("#logs .search-hidden").removeClass("search-hidden");
+      return false
+    }
+    elements = $("#logs>p").slice(-searchCount);
+    elements.each(function(i,val){
+      if(val.innerHTML.search(query) == -1){
+        $(val).addClass("search-hidden");
+      }
+    })
+  }
+
+  $("#search-query").keydown(function(e){
+    val = $(this).val().trim()
+    if ( (e.keyCode && e.keyCode == 13) || val==""){
+      search(val)
+    }
+  }).change(function(){
+    console.log("changing")
+  })
 
   $("#auto-scroll").click(function(){
     autoScroll = $(this).is(":checked");
@@ -32,7 +57,6 @@ $(document).ready(function(){
     socket.on("wt_error",function(error){console.log("Server error: "+error)})
     socket.on("wt_new",function(data){
       data = json(data)
-      console.log(data)
       li = "<li> <label><input class='file-select' data-fileid='"+data.hash+"' checked type='checkbox'>"+data.filename+"</label></li>"
       fileSettings[data.hash] = {hidden:false}
       $("#files>ul").prepend(li)
@@ -44,6 +68,9 @@ $(document).ready(function(){
       if(message == ""){return}
       className = ""
       if(fileSettings[data.hash]["hidden"] == true){className="hidden"}
+      if (searchQuery != "" && message.search(searchQuery) == -1 ){
+        className+=" search-hidden"
+      }
       $("#logs").append("<p class=' "+className+" "+data.hash+"'>"+message+"</p>")
       if(autoScroll){
         $("#logs").animate({ scrollTop: $("#logs")[0].scrollHeight}, 100);
