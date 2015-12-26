@@ -1,6 +1,7 @@
 {
   "port" : 7733,
   "files" : [
-    "/home/arjun/Desktop/development.log"
+    "/var/log/redis/redis-server.log",
+    "/home/arjun/logs/2015-12-26.log"
   ]
 }

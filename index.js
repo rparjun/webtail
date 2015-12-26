@@ -9,7 +9,7 @@ var router = require('./api.js')(express.Router(),config,sio);
 app.use('/api',router);
 app.use("/",express.static("public"));
 
-tail_files = {}
+tail_files = {};
 default_files = []
 if(config.files){
   config.files.forEach(function(file){

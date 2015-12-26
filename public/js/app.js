@@ -1,34 +1,47 @@
 $(document).ready(function(){
-  var gridster;
-  $(function(){
-    gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [100, 55],
-      widget_margins: [5, 5],
-      helper: 'clone',
-      resize: {
-        enabled: true
-      }
-    }).data('gridster');
-  });
+  $("#files").toggle()
   json = function(json_str){
     try{return JSON.parse(json_str);}
     catch(e){return {}}
   }
 
+  var fileSettings = {}
 
+  $("#show-files").click(function(){
+    $("#files").toggle()
+  })
+  $("#files>ul").on("click","input",function(e){
+    element = $(this);
+    fileid = element.data("fileid");
+    if(element.is(":checked") == true){
+      $("."+fileid).removeClass("hidden");
+      fileSettings[fileid]["hidden"] = false;
+    }
+    else{
+      $("."+fileid).addClass("hidden");
+      fileSettings[fileid]["hidden"] = true;
+    }
+  })
   var socket = io();
   socket.on('connect',function(){
     socket.emit('wt_init','Hello from client')
     socket.on("wt_error",function(error){console.log("Server error: "+error)})
-    data = {
-      "filename" : "/home/arjun/Desktop/blip/blip/log/development.log"
-    }
-    //socket.emit("wt_new",JSON.stringify(data));
     socket.on("wt_new",function(data){
       data = json(data)
-      gridster.add_widget("<li id='"+data.hash+"' data-row='1' data-col='1' data-sizex='6' data-sizey='6><div class='file-content'><div class='meta'></div></div></li>",6,6);
-  
+      console.log(data)
+      li = "<li> <label><input class='file-select' data-fileid='"+data.hash+"' checked type='checkbox'>"+data.filename+"</label></li>"
+      fileSettings[data.hash] = {hidden:false}
+      $("#files>ul").append(li)
     })
-    socket.on("wt_data",function(data){console.log(data)})
+    socket.on("wt_data",function(data){
+      data = json(data)
+      hash = data.hash
+      message = data.data.trim()
+      if(message == ""){return}
+      className = ""
+      if(fileSettings[data.hash]["hidden"] == true){className="hidden"}
+      $("#logs").append("<p class=' "+className+" "+data.hash+"'>"+message+"</p>")
+      $("body").animate({ scrollTop: $("body")[0].scrollHeight}, 100);
+    })
   })
 });

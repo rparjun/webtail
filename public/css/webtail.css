@@ -2,6 +2,7 @@ body{
   margin:0px;
   padding:0px;
   background-color: #FFFFFF;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 ul{
@@ -10,15 +11,79 @@ ul{
 
 .header{
   width: 100%;
-  height: 100px;
-  background-color: #D82E2E;
+  height: 30px;
+  background-color:#ECEFEE;
+  position: fixed;
+  top:0px;
+  text-align: center;
+  box-shadow: 0px 2px 9px #F3F3F3;
 }
-#files li{
+.header h4{
+  margin-top:5px;
+  font-family: 'monospace';
+  font-weight: 400;
+}
+#logs{
+  margin-top:30px;
+}
+#logs p{
+  margin: 3px;
+  font-size:15px;
+}
+#files{
+  position:fixed;
+  background-color:#FBFFF5;
+  padding:5px;
+  border: 1px solid #DED7D7;
+  border-radius: 2px;
+  box-shadow: 2px 2px 4px #DED7D7;
+  bottom: 40px;
+  right:1px;
+}
+#files>ul{
+  margin:0px;
+  padding:0px;
+}
+#files>ul>li{
+  padding:2px;
+}
+#files>ul>li>label{
+  cursor:pointer;
+}
+.hidden{
+  display:none;
+}
+.footer{
+  background-color:#ECEFEE;
+  position:fixed;
+  bottom:0px;
+  height:40px;
+  width:100%
+}
+
+input{
+  border:1px solid #B0B3B2;
+  background-color:#FFFFFF;
+}
+input[type='text']{
+  width:80%;
+  outline:none;
+  padding:5px;
   border-radius:4px;
-  border: 1px solid #C5A5A5;
-  background-color: #FFFFFF;
+  height:40px;
+  font-size:14px;
 }
-#files li .file-meta{
-  height:10px;
-  border-bottom:1px solid red;
+
+input[type='button']{
+  padding:2px;
+  width:60px;
+  height:37px;
+  outline:none;
+  border-radius: 2px;
+  cursor:pointer;
+  transition: background-color 0.5s ease;
+  background-color:#EFEFEF;
+}
+input[type='button']:hover, input[type='button']:active{
+  background-color:#DEDEDE;
 }

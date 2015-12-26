@@ -3,29 +3,28 @@
   <title>Web-Tail</title>
   <link rel="stylesheet" type="text/css" href="css/webtail.css" /> 
   <link rel="stylesheet" type="text/css" href="css/gridster.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 <div>
   <div class="header">
-    <p>Webtail</p> 
+    <div>
+      <h4>Webtail</h4>
+    </div>
   </div>
 
-  <div class="gridster">
-    <ul id="files">
-      
-      <li data-row="1" data-col="1" data-sizex="6" data-sizey="6">1</li>
-      <li data-row="1" data-col="1" data-sizex="6" data-sizey="1">2</li>
-     
-      <!--
-      <li data-row="4" data-col="1" data-sizex="1" data-sizey="1">4</li>
-      <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">5</li>
-      <li data-row="4" data-col="2" data-sizex="1" data-sizey="1">6</li>
-      <li data-row="5" data-col="2" data-sizex="1" data-sizey="1">7</li>
-      <li data-row="4" data-col="4" data-sizex="1" data-sizey="1">8</li>
-      <li data-row="1" data-col="5" data-sizex="1" data-sizey="3">9</li>
-    -->
-   </ul>
+  <div id="logs"></div>
+
+
+  <div id="files">
+    <ul></ul>
   </div>
+  <div class="footer">
+    <input type="text">
+    <input type="button" id="show-files" value="Files">
+  </div>
+
 </div>
 </body>
 
