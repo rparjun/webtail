@@ -25,6 +25,8 @@ ul{
 }
 #logs{
   margin-top:30px;
+  height:90%;
+  overflow-y:scroll;
 }
 #logs p{
   margin: 3px;
@@ -39,6 +41,9 @@ ul{
   box-shadow: 2px 2px 4px #DED7D7;
   bottom: 40px;
   right:1px;
+}
+#files>ul>li>hr{
+  border: 0.1em outset #FFFFFF; 
 }
 #files>ul{
   margin:0px;
@@ -56,7 +61,7 @@ ul{
 .footer{
   background-color:#ECEFEE;
   position:fixed;
-  bottom:0px;
+  bottom:1px;
   height:40px;
   width:100%
 }
@@ -75,9 +80,12 @@ input[type='text']{
 }
 
 input[type='button']{
-  padding:2px;
+  position:absolute;
+  top:1px;
+  right:2px;
+  font-size:25px;
   width:60px;
-  height:37px;
+  height:39px;
   outline:none;
   border-radius: 2px;
   cursor:pointer;

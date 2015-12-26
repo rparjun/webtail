@@ -4,8 +4,12 @@ $(document).ready(function(){
     try{return JSON.parse(json_str);}
     catch(e){return {}}
   }
+  var autoScroll = true,
+      fileSettings = {};
 
-  var fileSettings = {}
+  $("#auto-scroll").click(function(){
+    autoScroll = $(this).is(":checked");
+  })
 
   $("#show-files").click(function(){
     $("#files").toggle()
@@ -31,7 +35,7 @@ $(document).ready(function(){
       console.log(data)
       li = "<li> <label><input class='file-select' data-fileid='"+data.hash+"' checked type='checkbox'>"+data.filename+"</label></li>"
       fileSettings[data.hash] = {hidden:false}
-      $("#files>ul").append(li)
+      $("#files>ul").prepend(li)
     })
     socket.on("wt_data",function(data){
       data = json(data)
@@ -41,7 +45,9 @@ $(document).ready(function(){
       className = ""
       if(fileSettings[data.hash]["hidden"] == true){className="hidden"}
       $("#logs").append("<p class=' "+className+" "+data.hash+"'>"+message+"</p>")
-      $("body").animate({ scrollTop: $("body")[0].scrollHeight}, 100);
+      if(autoScroll){
+        $("#logs").animate({ scrollTop: $("#logs")[0].scrollHeight}, 100);
+      }
     })
   })
 });
