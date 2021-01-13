@@ -1,5 +1,5 @@
 module.exports = function(router,config){
-  router.get('/',function(req,res){
+   router.get('/',function(req,res){
     res.json({'foo':'bar'})
   })
 
